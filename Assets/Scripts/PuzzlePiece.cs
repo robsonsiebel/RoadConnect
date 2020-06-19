@@ -20,6 +20,13 @@ public class PuzzlePiece : MonoBehaviour
         
     }
 
+    public void Init()
+    {
+        StartingRotation = GetRandomRotation(false);
+        transform.localEulerAngles = new Vector3(0,0,StartingRotation);
+        TargetRotation = GetRandomRotation(true);
+    }
+
     private void OnMouseUp()
     {
         Rotate();
@@ -40,5 +47,37 @@ public class PuzzlePiece : MonoBehaviour
             if (OnPieceMoved != null)
                 OnPieceMoved.Invoke();
         });
+    }
+
+    public int GetRandomRotation(bool isTarget)
+    {
+        int r = UnityEngine.Random.Range(0, 3);
+        int rotation = 0;
+
+        switch (r)
+        {
+            case 0:
+                rotation = 0;
+            break;
+            case 1:
+                rotation = 90;
+            break;
+            case 2:
+                rotation = 180;
+            break;
+            case 3:
+                rotation = 270;
+            break;
+        }
+
+        if (isTarget)
+        {
+            if (rotation == StartingRotation)
+            {
+                rotation += 90;
+            }
+        }
+
+        return rotation;
     }
 }
