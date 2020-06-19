@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,11 +28,37 @@ public class PuzzleManager : MonoBehaviour
                 newPiece = GameObject.Instantiate(PiecePrefab).GetComponent<PuzzlePiece>();
                 newPiece.transform.position = new Vector3(StartingPuzzleArea.x + i, StartingPuzzleArea.y - k, 0);
                 newPiece.Init();
+                newPiece.OnPieceMoved += CheckForLevelComplete;
+                newPiece.name = "Piece " + i + k;
+                AllPieces.Add(newPiece);
             }
                 
         }
     }
 
+    private void CheckForLevelComplete()
+    {
+        foreach (PuzzlePiece piece in AllPieces)
+        {
+            if (!piece.IsOnTargetPosition())
+            {
+                return;
+            }    
+        }
 
+        OnLevelComplete();
+    }
 
+    private void OnLevelComplete()
+    {
+        print("Level Complete!");
+    }
+
+    private void OnDisable()
+    {
+        foreach(PuzzlePiece piece in AllPieces)
+        {
+            piece.OnPieceMoved -= CheckForLevelComplete;
+        }
+    }
 }

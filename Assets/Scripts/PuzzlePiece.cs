@@ -27,6 +27,21 @@ public class PuzzlePiece : MonoBehaviour
         TargetRotation = GetRandomRotation(true);
     }
 
+    public bool IsOnTargetPosition()
+    {
+        //Debug purposes
+        if (Mathf.Approximately(transform.localEulerAngles.z, TargetRotation))
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
+        return Mathf.Approximately(transform.localEulerAngles.z,TargetRotation);
+    }
+
     private void OnMouseUp()
     {
         Rotate();
@@ -37,12 +52,13 @@ public class PuzzlePiece : MonoBehaviour
         if (m_Rotating)
             return;
 
-        print("rotation: " + transform.localEulerAngles);
+        print("BEFORE -> rotation: " + transform.localEulerAngles.z);
 
         m_Rotating = true;
 
         LeanTween.rotateZ(gameObject, transform.localEulerAngles.z - 90, ROTATE_SPEED).setOnComplete(() =>
         {
+            print("Rotation: " + transform.localEulerAngles.z + ", Target: " + TargetRotation);
             m_Rotating = false;
             if (OnPieceMoved != null)
                 OnPieceMoved.Invoke();
