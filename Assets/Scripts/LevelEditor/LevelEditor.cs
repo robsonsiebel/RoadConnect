@@ -9,6 +9,8 @@ public enum LevelEditorMode { Layout, Start, Solution}
 
 public class LevelEditor : MonoBehaviour
 {
+    private string LEVEL_PREFIX = "Level";
+
     private int m_rows = 4;
     private int m_columns = 4;
 
@@ -76,7 +78,7 @@ public class LevelEditor : MonoBehaviour
     {
         foreach(LevelData level in LevelCreatorData.GameLevels)
         {
-            if (level.levelID == levelSelectorDropdown.options[levelSelectorDropdown.value].text)
+            if (level.levelID == levelSelectorDropdown.value)
             {
                 print("level found!" + level.levelID);
                 LoadLevel(level);
@@ -94,6 +96,8 @@ public class LevelEditor : MonoBehaviour
             m_AllButtons[i].StartRotation = level.AllPieces[i].StartRotation;
             m_AllButtons[i].TargetRotation = level.AllPieces[i].TargetRotation;
 
+            print("piece ID " + level.AllPieces[i].PieceID);
+
             if (m_AllButtons[i].CurrentPieceId != -1)
             {
                 m_AllButtons[i].UpdateSprite(LevelCreatorData.LevelSprites[m_AllButtons[i].CurrentPieceId]);
@@ -106,7 +110,7 @@ public class LevelEditor : MonoBehaviour
         List<string> options = new List<string>();
         foreach (LevelData levelData in LevelCreatorData.GameLevels)
         {
-            options.Add(levelData.levelID);
+            options.Add(levelData.levelID.ToString());
         }
         LevelSelectorDropdown.ClearOptions();
         LevelSelectorDropdown.AddOptions(options);
@@ -218,15 +222,7 @@ public class LevelEditor : MonoBehaviour
         foreach (GridButton button in m_AllButtons)
         {
             print("saving " + button.CurrentPieceId);
-            /*if(button.CurrentPieceId == -1)
-            {
-                newLevel.AllPieces.Add(new PieceData(null, button.StartRotation, button.TargetRotation));
-            }*/
-            //else
-            //{
-                newLevel.AllPieces.Add(new PieceData(button.CurrentPieceId, button.StartRotation, button.TargetRotation));
-            //}
-            
+            newLevel.AllPieces.Add(new PieceData(button.CurrentPieceId, button.StartRotation, button.TargetRotation));    
         }
 
         LevelCreatorData.AddNewNevel(newLevel);

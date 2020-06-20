@@ -8,22 +8,33 @@ public class PuzzlePiece : MonoBehaviour
     private readonly float ROTATE_SPEED = 0.15f;
 
     private bool m_Rotating = false;
-    private Sprite m_Sprite;
+    private SpriteRenderer m_Sprite;
 
-    public int StartingRotation { get; set; }
-    public int TargetRotation { get; set; }
+    public int StartingRotation;
+    public int TargetRotation;
 
     // Events
     public Action OnPieceMoved;
 
     void Awake()
     {
-        m_Sprite = GetComponent<Sprite>();
+        m_Sprite = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        transform.localScale = Vector3.zero;
+        LeanTween.scale(gameObject, Vector3.one, 0.25f).setDelay(UnityEngine.Random.Range(0.25f, 0.75f)).setEaseInOutQuad();
+    }
+
+    public void Disappear()
+    {
+        LeanTween.scale(gameObject, Vector3.zero, 0.25f).setDelay(0.5f).setEaseInOutQuad();
     }
 
     public void Init(int startRotation, int targetRotation, Sprite sprite)
     {
-        m_Sprite = sprite;
+        m_Sprite.sprite = sprite;
         StartingRotation = startRotation;
         transform.localEulerAngles = new Vector3(0,0,StartingRotation);
         TargetRotation = targetRotation;
@@ -31,16 +42,6 @@ public class PuzzlePiece : MonoBehaviour
 
     public bool IsOnTargetPosition()
     {
-        //Debug purposes
-        if (Mathf.Approximately(transform.localEulerAngles.z, TargetRotation))
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
-        }
-
         return Mathf.Approximately(transform.localEulerAngles.z,TargetRotation);
     }
 
@@ -54,13 +55,10 @@ public class PuzzlePiece : MonoBehaviour
         if (m_Rotating)
             return;
 
-        print("BEFORE -> rotation: " + transform.localEulerAngles.z);
-
         m_Rotating = true;
 
         LeanTween.rotateZ(gameObject, transform.localEulerAngles.z - 90, ROTATE_SPEED).setOnComplete(() =>
         {
-            print("Rotation: " + transform.localEulerAngles.z + ", Target: " + TargetRotation);
             m_Rotating = false;
             if (OnPieceMoved != null)
                 OnPieceMoved.Invoke();

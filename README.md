@@ -25,3 +25,7 @@ Gif 04 - Editor Save/Load/Clear
 Gif 05 - Level Select
 
 ![alt text](https://i.imgur.com/8zESPfx.gif) 
+
+Gif 06
+
+![alt text](https://i.imgur.com/m1DdwxJ.gif) 

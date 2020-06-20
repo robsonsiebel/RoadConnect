@@ -11,6 +11,8 @@ public class PuzzleManager : MonoBehaviour
     public List<PuzzlePiece> AllPieces;
     public GameObject PiecePrefab;
 
+    public Action OnLevelComplete;
+
     public void ClearLevel()
     {
         foreach (PuzzlePiece piece in AllPieces)
@@ -58,11 +60,21 @@ public class PuzzleManager : MonoBehaviour
             }    
         }
 
-        OnLevelComplete();
+        LevelComplete();
     }
 
-    private void OnLevelComplete()
+    private void LevelComplete()
     {
+        foreach (PuzzlePiece piece in AllPieces)
+        {
+            piece.Disappear();
+        }
+
+        if (OnLevelComplete != null)
+        {
+            OnLevelComplete.Invoke();
+        }
+            
         print("Level Complete!");
     }
 

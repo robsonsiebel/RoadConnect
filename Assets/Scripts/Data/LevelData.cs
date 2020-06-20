@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelData
 {
 
-    public string levelID;
+    public int levelID;
 
     public List<PieceData> AllPieces = new List<PieceData>();
 }

@@ -14,7 +14,7 @@ public class LevelCreatorData : ScriptableObject
 
     public void AddNewNevel(LevelData newLevel)
     {
-        newLevel.levelID = "Level" + GameLevels.Count;
+        newLevel.levelID = GameLevels.Count;
         GameLevels.Add(newLevel);
         EditorUtility.SetDirty(this);
         Debug.Log("level added");

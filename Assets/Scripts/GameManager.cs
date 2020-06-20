@@ -5,21 +5,44 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    private int m_NumberOfLevels;
+    private int m_CurrentLevel;
+
     public LevelCreatorData LevelCreatorData;
     public LevelSelectMenu LevelSelect;
     public PuzzleManager PuzzleManager;
     public GameUI GameUI;
 
 
-    private void Awake()
+    void Awake()
     {
         GameUI.BtnMenu.onClick.AddListener(OnMenuPressed);
+        PuzzleManager.OnLevelComplete += HandleLevelComplete;
     }
 
     void Start()
     {
+        m_NumberOfLevels = LevelCreatorData.GameLevels.Count;
         PopulateLevelSelect();
         LevelSelect.gameObject.SetActive(true);
+
+    }
+
+    private void HandleLevelComplete()
+    {
+        GameUI.LevelCompleteAnimation();
+
+        StartCoroutine(LevelTransition());
+    }
+
+    IEnumerator LevelTransition()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        GameUI.NewLevelAnimation();
+        m_CurrentLevel++;
+        LoadLevel(m_CurrentLevel);
     }
 
     private void OnEnable()
@@ -38,14 +61,15 @@ public class GameManager : MonoBehaviour
         PuzzleManager.ClearLevel();
     }
 
-    private void LoadLevel(string levelID, string displayName)
+    private void LoadLevel(int levelID)
     {
+        m_CurrentLevel = levelID;
         LevelSelect.gameObject.SetActive(false);
         PuzzleManager.PopulateLevel(GetLevelWithID(levelID), LevelCreatorData.LevelSprites);
-        GameUI.SetLevelName(displayName);
+        GameUI.SetLevelName("Level " + levelID);
     }
 
-    LevelData GetLevelWithID(string levelID)
+    LevelData GetLevelWithID(int levelID)
     {
         LevelData level = new LevelData();
 
