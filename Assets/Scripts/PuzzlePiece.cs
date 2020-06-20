@@ -8,6 +8,7 @@ public class PuzzlePiece : MonoBehaviour
     private readonly float ROTATE_SPEED = 0.15f;
 
     private bool m_Rotating = false;
+    private Sprite m_Sprite;
 
     public int StartingRotation { get; set; }
     public int TargetRotation { get; set; }
@@ -15,16 +16,17 @@ public class PuzzlePiece : MonoBehaviour
     // Events
     public Action OnPieceMoved;
 
-    void Start()
+    void Awake()
     {
-        
+        m_Sprite = GetComponent<Sprite>();
     }
 
-    public void Init()
+    public void Init(int startRotation, int targetRotation, Sprite sprite)
     {
-        StartingRotation = GetRandomRotation(false);
+        m_Sprite = sprite;
+        StartingRotation = startRotation;
         transform.localEulerAngles = new Vector3(0,0,StartingRotation);
-        TargetRotation = GetRandomRotation(true);
+        TargetRotation = targetRotation;
     }
 
     public bool IsOnTargetPosition()

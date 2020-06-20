@@ -5,34 +5,46 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
-    private Vector2 StartingPuzzleArea = new Vector2(-0.5f, 0.5f);
+    private Vector2 StartingPuzzleArea = new Vector2(-1.5f, 2.5f);
     private int PuzzleSize = 4;
 
     public List<PuzzlePiece> AllPieces;
     public GameObject PiecePrefab;
 
-    
-
-    void Start()
+    public void ClearLevel()
     {
-        PopulateLevel();
+        foreach (PuzzlePiece piece in AllPieces)
+        {
+            Destroy(piece.gameObject);
+        }
+        AllPieces.Clear();
     }
 
-    void PopulateLevel()
+    public void PopulateLevel(LevelData level, Sprite[] levelSprites)
     {
         PuzzlePiece newPiece;
-        for (int i = 0; i < PuzzleSize/2; i++)
+
+        int hCount = 0;
+        int vCount = 0;
+        foreach (PieceData piece in level.AllPieces)
         {
-            for (int k = 0; k < PuzzleSize / 2; k++)
+            if (piece.PieceID != -1)
             {
                 newPiece = GameObject.Instantiate(PiecePrefab).GetComponent<PuzzlePiece>();
-                newPiece.transform.position = new Vector3(StartingPuzzleArea.x + i, StartingPuzzleArea.y - k, 0);
-                newPiece.Init();
+                newPiece.transform.position = new Vector3(StartingPuzzleArea.x + hCount, StartingPuzzleArea.y - vCount, 0);
+                newPiece.Init(piece.StartRotation, piece.TargetRotation, levelSprites[piece.PieceID]);
                 newPiece.OnPieceMoved += CheckForLevelComplete;
-                newPiece.name = "Piece " + i + k;
+                newPiece.name = "Piece " + hCount + vCount;
                 AllPieces.Add(newPiece);
             }
-                
+
+            hCount++;
+
+            if (hCount >= PuzzleSize)
+            {
+                hCount = 0;
+                vCount++;
+            }
         }
     }
 
