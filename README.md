@@ -11,3 +11,7 @@ Gif 02 - Basic Editor
 Gif 03 - Editor Rotation
 
 ![alt text](https://i.imgur.com/MgkChzp.gif) 
+
+Gif 04 - Editor Save/Load/Clear
+
+![alt text](https://i.imgur.com/0UYIsej.gif) 

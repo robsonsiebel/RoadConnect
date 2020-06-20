@@ -27,6 +27,12 @@ public class LevelEditor : MonoBehaviour
     public Button BtnStartRotation;
     public Button BtnSolution;
 
+    public Button BtnSave;
+    public Button BtnClear;
+
+    public TMP_Dropdown LevelSelectorDropdown;
+
+
     private void Start()
     {
         BtnLayout.onClick.AddListener(() =>
@@ -44,8 +50,66 @@ public class LevelEditor : MonoBehaviour
             m_CurrentMode = LevelEditorMode.Solution;
             OnEditorModeChanged();
         });
+
+        BtnSave.onClick.AddListener(SaveLevel);
+        BtnClear.onClick.AddListener(ClearLevel);
+
         PopulateGrid();
         BtnLayout.interactable = false;
+
+        PopulateDropdown();
+        LevelSelectorDropdown.onValueChanged.AddListener(delegate
+        {
+            OnValueSelected(LevelSelectorDropdown);
+        });
+    }
+
+    private void ClearLevel()
+    {
+        foreach(GridButton button in m_AllButtons)
+        {
+            button.SetEmpty();
+        }
+    }
+
+    private void OnValueSelected(TMP_Dropdown levelSelectorDropdown)
+    {
+        foreach(LevelData level in LevelCreatorData.GameLevels)
+        {
+            if (level.levelID == levelSelectorDropdown.options[levelSelectorDropdown.value].text)
+            {
+                print("level found!" + level.levelID);
+                LoadLevel(level);
+            }
+        }
+        
+    }
+
+    void LoadLevel(LevelData level)
+    {
+        for (int i = 0; i < m_AllButtons.Count; i++)
+        {
+            m_AllButtons[i].SetEmpty();
+            m_AllButtons[i].CurrentPieceId = level.AllPieces[i].PieceID;
+            m_AllButtons[i].StartRotation = level.AllPieces[i].StartRotation;
+            m_AllButtons[i].TargetRotation = level.AllPieces[i].TargetRotation;
+
+            if (m_AllButtons[i].CurrentPieceId != -1)
+            {
+                m_AllButtons[i].UpdateSprite(LevelCreatorData.LevelSprites[m_AllButtons[i].CurrentPieceId]);
+            }
+        }
+    }
+
+    void PopulateDropdown()
+    {
+        List<string> options = new List<string>();
+        foreach (LevelData levelData in LevelCreatorData.GameLevels)
+        {
+            options.Add(levelData.levelID);
+        }
+        LevelSelectorDropdown.ClearOptions();
+        LevelSelectorDropdown.AddOptions(options);
     }
 
     private void PopulateGrid()
@@ -58,23 +122,28 @@ public class LevelEditor : MonoBehaviour
             {
                 newButton = GameObject.Instantiate(GridButtonPrefab, Grid.gameObject.transform).GetComponent<GridButton>();
                 m_AllButtons.Add(newButton);
+                newButton.name = "Piece" + r + c;
                 newButton.OnClick += OnGridButtonClicked;
             }
         }
     }
 
-    private void OnGridButtonClicked(int id, GridButton button)
+    private void OnGridButtonClicked(GridButton button)
     {
+
         if (m_CurrentMode == LevelEditorMode.Layout)
         {
-            if (id >= LevelCreatorData.LevelSprites.Length)
+            button.CurrentPieceId++;
+            if (button.CurrentPieceId >= LevelCreatorData.LevelSprites.Length)
             {
-                id = -1;
                 button.SetEmpty();
-                return;
-            }
 
-            button.UpdateSprite(LevelCreatorData.LevelSprites[id]);
+            }
+            else
+            {
+                button.UpdateSprite(LevelCreatorData.LevelSprites[button.CurrentPieceId]);
+            }
+            
         }else
         if (m_CurrentMode == LevelEditorMode.Start)
         {
@@ -84,6 +153,24 @@ public class LevelEditor : MonoBehaviour
         {
             button.SetTargetRotation();
         }
+
+        BtnSave.interactable = CheckSaveButtonEnable();
+    }
+
+    // So that an empty level cannot be saved
+    bool CheckSaveButtonEnable()
+    {
+        bool gridHasAtLeastOnePiece = false;
+
+        foreach (GridButton piece in m_AllButtons)
+        {
+            if (piece.CurrentPieceId != -1)
+            {
+                gridHasAtLeastOnePiece = true;
+            }
+        }
+
+        return gridHasAtLeastOnePiece;
     }
 
     void OnEditorModeChanged()
@@ -123,6 +210,29 @@ public class LevelEditor : MonoBehaviour
                 piece.SetVisible(visible);
             }
         }
+    }
+
+    private void SaveLevel()
+    {
+        LevelData newLevel = new LevelData();
+        foreach (GridButton button in m_AllButtons)
+        {
+            print("saving " + button.CurrentPieceId);
+            /*if(button.CurrentPieceId == -1)
+            {
+                newLevel.AllPieces.Add(new PieceData(null, button.StartRotation, button.TargetRotation));
+            }*/
+            //else
+            //{
+                newLevel.AllPieces.Add(new PieceData(button.CurrentPieceId, button.StartRotation, button.TargetRotation));
+            //}
+            
+        }
+
+        LevelCreatorData.AddNewNevel(newLevel);
+
+        PopulateDropdown();
+
     }
 
 

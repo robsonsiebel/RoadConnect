@@ -11,12 +11,12 @@ public class GridButton : MonoBehaviour
     private Button m_Button;
 
     public int CurrentPieceId = -1;  // -1 is empty
-    public int StartRotation;
-    public int TargetRotation;
+    public int StartRotation = 0;
+    public int TargetRotation = 0;
 
     public Text t_button;
 
-    public Action<int, GridButton> OnClick; 
+    public Action<GridButton> OnClick; 
 
     void Awake()
     {
@@ -26,8 +26,7 @@ public class GridButton : MonoBehaviour
 
     private void OnButtonClick()
     {
-        CurrentPieceId++;
-        OnClick.Invoke(CurrentPieceId, this);
+        OnClick.Invoke(this);
     }
 
     public void UpdateSprite(Sprite newSprite)
@@ -41,6 +40,9 @@ public class GridButton : MonoBehaviour
         CurrentPieceId = -1;
         m_Button.image.sprite = null;
         t_button.text = DEFAULT_TEXT;
+        StartRotation = 0;
+        TargetRotation = 0;
+        m_Button.transform.localEulerAngles = Vector3.zero;
     }
 
     public void SetVisible(bool isVisible)
