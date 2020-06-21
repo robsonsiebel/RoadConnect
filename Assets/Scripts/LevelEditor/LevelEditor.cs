@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -11,22 +9,19 @@ public class LevelEditor : MonoBehaviour
 {
     private string LEVEL_PREFIX = "Level";
 
-    private int m_rows = 4;
-    private int m_columns = 4;
-
+    private int m_Rows = 4;
+    private int m_Columns = 4;
+    private bool m_LevelLoaded = false;
     private LevelEditorMode m_CurrentMode = LevelEditorMode.Layout;
-
     private List<GridButton> m_AllButtons = new List<GridButton>();
 
+    [Header("GameObjects")]
     public GameObject GridButtonPrefab;
     public GameObject Grid;
 
+    [Header("Data")]
     public LevelCreatorData LevelCreatorData;
-
-    public TMP_Text t_editor_mode;
-
-    public TMP_Dropdown LevelSelectorDropdown;
-
+    
     [Header("Buttons")]
     public Button BtnLayout;
     public Button BtnStartRotation;
@@ -35,7 +30,12 @@ public class LevelEditor : MonoBehaviour
     public Button BtnClear;
     public Button BtnClose;
 
+    [Header("Others")]
+    public TMP_Text t_status;
+    public TMP_Text t_editor_mode;
+    public TMP_Dropdown LevelSelectorDropdown;
 
+    #region Private
     private void Start()
     {
         BtnLayout.onClick.AddListener(() =>
@@ -61,6 +61,7 @@ public class LevelEditor : MonoBehaviour
         BtnLayout.interactable = false;
 
         PopulateDropdown();
+
         LevelSelectorDropdown.onValueChanged.AddListener(delegate
         {
             OnValueSelected(LevelSelectorDropdown);
@@ -75,6 +76,9 @@ public class LevelEditor : MonoBehaviour
         {
             button.SetEmpty();
         }
+
+        t_status.text = "Clean slate!";
+        m_LevelLoaded = false;
     }
 
     private void OnValueSelected(TMP_Dropdown levelSelectorDropdown)
@@ -86,11 +90,13 @@ public class LevelEditor : MonoBehaviour
                 LoadLevel(level);
             }
         }
-        
     }
 
-    void LoadLevel(LevelData level)
+    private void LoadLevel(LevelData level)
     {
+        m_LevelLoaded = true;
+        t_status.text = "Loaded level " + level.LevelID;
+
         for (int i = 0; i < m_AllButtons.Count; i++)
         {
             m_AllButtons[i].SetEmpty();
@@ -105,7 +111,7 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    void PopulateDropdown()
+    private void PopulateDropdown()
     {
         List<string> options = new List<string>();
         foreach (LevelData levelData in LevelCreatorData.GameLevels)
@@ -120,9 +126,9 @@ public class LevelEditor : MonoBehaviour
     {
         GridButton newButton;
 
-        for(int r = 0; r < m_rows; r++)
+        for(int r = 0; r < m_Rows; r++)
         {
-            for (int c = 0; c < m_columns; c++)
+            for (int c = 0; c < m_Columns; c++)
             {
                 newButton = GameObject.Instantiate(GridButtonPrefab, Grid.gameObject.transform).GetComponent<GridButton>();
                 m_AllButtons.Add(newButton);
@@ -134,7 +140,6 @@ public class LevelEditor : MonoBehaviour
 
     private void OnGridButtonClicked(GridButton button)
     {
-
         if (m_CurrentMode == LevelEditorMode.Layout)
         {
             button.CurrentPieceId++;
@@ -162,7 +167,7 @@ public class LevelEditor : MonoBehaviour
     }
 
     // So that an empty level cannot be saved
-    bool CheckSaveButtonEnable()
+    private bool CheckSaveButtonEnable()
     {
         bool gridHasAtLeastOnePiece = false;
 
@@ -177,7 +182,7 @@ public class LevelEditor : MonoBehaviour
         return gridHasAtLeastOnePiece;
     }
 
-    void OnEditorModeChanged()
+    private void OnEditorModeChanged()
     {
         switch (m_CurrentMode)
         {
@@ -210,7 +215,7 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    void SetUnusedTilesVisible(bool visible)
+    private void SetUnusedTilesVisible(bool visible)
     {
         foreach(GridButton piece in m_AllButtons)
         {
@@ -221,7 +226,7 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    void SwitchToTargetRotation()
+    private void SwitchToTargetRotation()
     {
         foreach (GridButton piece in m_AllButtons)
         {
@@ -232,7 +237,7 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    void SwitchToStartingRotation()
+    private void SwitchToStartingRotation()
     {
         foreach (GridButton piece in m_AllButtons)
         {
@@ -248,15 +253,22 @@ public class LevelEditor : MonoBehaviour
         LevelData newLevel = new LevelData();
         foreach (GridButton button in m_AllButtons)
         {
-            print("saving " + button.CurrentPieceId);
-            newLevel.AllPieces.Add(new PieceData(button.CurrentPieceId, button.StartRotation, button.TargetRotation));    
+            newLevel.AllPieces.Add(new PieceData(button.CurrentPieceId, button.StartRotation, button.TargetRotation));
         }
 
-        LevelCreatorData.AddNewNevel(newLevel);
+        if (m_LevelLoaded)
+        {
+            t_status.text = "Level " + LevelSelectorDropdown.value + " replaced!";
+            LevelCreatorData.ReplaceLevel(LevelSelectorDropdown.value, newLevel);
+        }
+        else
+        {
+            t_status.text = "New Level saved!";
+            LevelCreatorData.AddNewNevel(newLevel);
+        }
 
         PopulateDropdown();
-
     }
-
+    #endregion
 
 }
