@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +8,18 @@ public class GridButton : MonoBehaviour
 
     private Button m_Button;
 
+    [Header("Attributes")]
     public int CurrentPieceId = -1;  // -1 is empty
     public int StartRotation = 0;
     public int TargetRotation = 0;
 
+    [Header("Text")]
     public Text t_button;
 
-    public Action<GridButton> OnClick; 
+    public Action<GridButton> OnClick;
 
-    void Awake()
+    #region Private
+    private void Awake()
     {
         m_Button = GetComponent<Button>();
         m_Button.onClick.AddListener(OnButtonClick);
@@ -29,6 +30,13 @@ public class GridButton : MonoBehaviour
         OnClick.Invoke(this);
     }
 
+    private void Rotate()
+    {
+        m_Button.transform.localEulerAngles = new Vector3(0, 0, m_Button.transform.localEulerAngles.z - 90);
+    }
+    #endregion
+
+    #region Public
     public void UpdateSprite(Sprite newSprite)
     {
         m_Button.image.sprite = newSprite;
@@ -58,8 +66,7 @@ public class GridButton : MonoBehaviour
             m_Button.interactable = false;
             m_Button.image.color = new Color(0, 0, 0, 0);
             t_button.text = "";
-        }
-        
+        }   
     }
 
     public void SetStartRotation()
@@ -83,9 +90,5 @@ public class GridButton : MonoBehaviour
     {
         m_Button.transform.localEulerAngles = new Vector3(0, 0, StartRotation);
     }
-
-    void Rotate()
-    {
-        m_Button.transform.localEulerAngles = new Vector3(0, 0, m_Button.transform.localEulerAngles.z - 90);
-    }
+    #endregion
 }

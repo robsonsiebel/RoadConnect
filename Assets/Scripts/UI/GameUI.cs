@@ -15,12 +15,15 @@ public class GameUI : MonoBehaviour
     [Header("Animations")]
     public Animator LevelHeader;
 
+    #region Private
     private void Start()
     {
         BtnPlay.gameObject.SetActive(false);
         BtnMenu.onClick.AddListener(() => TxtEndGame.gameObject.SetActive(false));
     }
+    #endregion
 
+    #region Public
     public void SetLevelName(string levelName)
     {
         TxtLevelName.text = levelName;
@@ -48,4 +51,5 @@ public class GameUI : MonoBehaviour
         BtnPlay.gameObject.SetActive(true);        
         LeanTween.scale(BtnPlay.gameObject, Vector3.one, 0.5f).setEaseInOutQuad();
     }
+    #endregion
 }

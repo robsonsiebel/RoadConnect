@@ -7,7 +7,6 @@
 
     }
 
-
     public static T Instance
     {
         get

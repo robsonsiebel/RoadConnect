@@ -5,20 +5,20 @@ public class PuzzlePiece : MonoBehaviour
 {
     private readonly float ROTATE_SPEED = 0.15f;
 
-    private bool m_Rotating = false;
     private SpriteRenderer m_Sprite;
-    private bool m_Locked;
     private AudioSource m_Audio;
+    private bool m_Rotating = false;
+    private bool m_Locked;
     private bool m_IsMirrored;
     private bool m_IsBonus;
 
     public int StartingRotation;
     public int TargetRotation;
 
-    // Events
     public Action OnPieceMoved;
 
-    void Awake()
+    #region Private
+    private void Awake()
     {
         m_Sprite = GetComponent<SpriteRenderer>();
         m_Audio = GetComponent<AudioSource>();
@@ -30,6 +30,16 @@ public class PuzzlePiece : MonoBehaviour
         LeanTween.scale(gameObject, Vector3.one, 0.25f).setDelay(UnityEngine.Random.Range(0.25f, 0.75f)).setEaseInOutQuad().setOnStart(() => m_Audio.Play());
     }
 
+    private void OnMouseUp()
+    {
+        if (!m_Locked)
+        {
+            Rotate();
+        }
+    }
+    #endregion
+
+    #region Public
     public void Disappear()
     {
         m_Locked = true;
@@ -56,7 +66,6 @@ public class PuzzlePiece : MonoBehaviour
 
     public bool IsOnTargetPosition()
     {
-
         if (m_IsBonus)
         {
             return true;
@@ -90,14 +99,6 @@ public class PuzzlePiece : MonoBehaviour
         return Mathf.Approximately(transform.localEulerAngles.z,TargetRotation);
     }
 
-    private void OnMouseUp()
-    {
-        if (!m_Locked)
-        {
-            Rotate();
-        }
-    }
-
     public void Rotate()
     {
         if (m_Rotating)
@@ -114,4 +115,5 @@ public class PuzzlePiece : MonoBehaviour
 
         SoundLibrary.Instance.PlaySound(SFX.ShapeRotate);
     }
+    #endregion
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +8,7 @@ public class GameManager : MonoBehaviour
     private int m_NumberOfLevels;
     private int m_CurrentLevel;
 
+    [Header("Controllers")]
     public LevelCreatorData LevelCreatorData;
     public PuzzleManager PuzzleManager;
     public GameUI GameUI;
@@ -18,54 +17,18 @@ public class GameManager : MonoBehaviour
     public LevelSelectMenu LevelSelect;
     public TitleScreen TitleScreen;
 
-    void Awake()
+    #region Private
+    private void Awake()
     {
         GameUI.BtnMenu.onClick.AddListener(OnMenuPressed);
         GameUI.BtnPlay.onClick.AddListener(OnPlayPressed);
         PuzzleManager.OnLevelComplete += HandleLevelComplete;
         TitleScreen.OnAnimationComplete += HandleTItleScreenAnimationComplete;
     }
-
-    private void HandleTItleScreenAnimationComplete()
-    {
-        GameUI.ButtonPlayAppear();
-    }
-
-    void Start()
+    
+    private void Start()
     {
         SoundLibrary.Instance.PlayMusic();
-    }
-
-    private void HandleLevelComplete()
-    {
-        GameUI.LevelCompleteAnimation();
-        SaveProgress(m_CurrentLevel);
-
-        if (!(m_CurrentLevel >= m_NumberOfLevels - 1))
-        {
-            StartCoroutine(LevelTransition());
-        }
-        else
-        {
-            StartCoroutine(EndGameAnimation());
-        }
-        
-    }
-
-    IEnumerator EndGameAnimation()
-    {
-        yield return new WaitForSeconds(1.5f);
-
-        GameUI.AllLevelsCompleteAnimation();
-    }
-
-    IEnumerator LevelTransition()
-    {
-        yield return new WaitForSeconds(1.5f);
-
-        GameUI.NewLevelAnimation();
-        m_CurrentLevel++;
-        LoadLevel(m_CurrentLevel);
     }
 
     private void OnEnable()
@@ -99,12 +62,6 @@ public class GameManager : MonoBehaviour
         SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
     }
 
-    IEnumerator RemoveTitleScreen()
-    {
-        yield return new WaitForSeconds(0.5f);
-        TitleScreen.gameObject.SetActive(false);
-    }
-
     private void LoadLevel(int levelID)
     {
         m_CurrentLevel = levelID;
@@ -113,7 +70,7 @@ public class GameManager : MonoBehaviour
         GameUI.SetLevelName("Level " + levelID);
     }
 
-    LevelData GetLevelWithID(int levelID)
+    private LevelData GetLevelWithID(int levelID)
     {
         LevelData level = new LevelData();
 
@@ -128,22 +85,21 @@ public class GameManager : MonoBehaviour
         return level;
     }
 
-    void PopulateLevelSelect()
+    private void PopulateLevelSelect()
     {
         LevelSelect.ClearMenu();
 
-        foreach(LevelData level in LevelCreatorData.GameLevels)
+        foreach (LevelData level in LevelCreatorData.GameLevels)
         {
             bool unlocked = CheckIfLevelIsUnlocked(level.LevelID);
             LevelSelect.AddLevel(level.LevelID, unlocked);
         }
-
     }
 
-    bool CheckIfLevelIsUnlocked(int levelID)
+    private bool CheckIfLevelIsUnlocked(int levelID)
     {
         bool isUnlocked = false;
-        
+
         // Fist level is always available
         if (levelID == 0)
         {
@@ -160,8 +116,54 @@ public class GameManager : MonoBehaviour
         return isUnlocked;
     }
 
-    void SaveProgress(int levelID)
+    private void HandleTItleScreenAnimationComplete()
+    {
+        GameUI.ButtonPlayAppear();
+    }
+
+    private void HandleLevelComplete()
+    {
+        GameUI.LevelCompleteAnimation();
+        SaveProgress(m_CurrentLevel);
+
+        if (!(m_CurrentLevel >= m_NumberOfLevels - 1))
+        {
+            StartCoroutine(LevelTransition());
+        }
+        else
+        {
+            StartCoroutine(EndGameAnimation());
+        }
+
+    }
+
+    private void SaveProgress(int levelID)
     {
         PlayerPrefs.SetInt(LEVEL_KEY + levelID, 1);
     }
+    #endregion
+
+    #region IEnumerators
+    IEnumerator EndGameAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        GameUI.AllLevelsCompleteAnimation();
+    }
+
+    IEnumerator LevelTransition()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        GameUI.NewLevelAnimation();
+        m_CurrentLevel++;
+        LoadLevel(m_CurrentLevel);
+    }
+
+    IEnumerator RemoveTitleScreen()
+    {
+        yield return new WaitForSeconds(0.5f);
+        TitleScreen.gameObject.SetActive(false);
+    }
+    #endregion    
 }
