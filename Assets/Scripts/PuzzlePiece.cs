@@ -9,6 +9,7 @@ public class PuzzlePiece : MonoBehaviour
 
     private bool m_Rotating = false;
     private SpriteRenderer m_Sprite;
+    private bool m_Locked;
 
     public int StartingRotation;
     public int TargetRotation;
@@ -29,6 +30,7 @@ public class PuzzlePiece : MonoBehaviour
 
     public void Disappear()
     {
+        m_Locked = true;
         LeanTween.scale(gameObject, Vector3.zero, 0.25f).setDelay(0.5f).setEaseInOutQuad();
     }
 
@@ -47,7 +49,10 @@ public class PuzzlePiece : MonoBehaviour
 
     private void OnMouseUp()
     {
-        Rotate();
+        if (!m_Locked)
+        {
+            Rotate();
+        }
     }
 
     public void Rotate()
