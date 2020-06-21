@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         m_NumberOfLevels = LevelCreatorData.GameLevels.Count;
         PopulateLevelSelect();
         LevelSelect.gameObject.SetActive(true);
+        SoundLibrary.Instance.PlayMusic();
 
     }
 
@@ -77,6 +78,8 @@ public class GameManager : MonoBehaviour
         LevelSelect.gameObject.SetActive(true);
         PuzzleManager.ClearLevel();
         PopulateLevelSelect();
+
+        SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
     }
 
     private void LoadLevel(int levelID)

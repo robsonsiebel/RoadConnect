@@ -19,7 +19,12 @@ public class LevelSelectMenu : MonoBehaviour
         
         newLevel.name = "Level " + levelID + 1;
         newLevel.GetComponentInChildren<TMP_Text>().text = (levelID + 1).ToString();
-        newLevel.onClick.AddListener(() => OnLevelPressed(levelID));
+        newLevel.onClick.AddListener(() =>
+        {
+            OnLevelPressed(levelID);
+            SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
+        });
+
         AllButtons.Add(newLevel);
         if (!unlocked)
         {
@@ -33,5 +38,7 @@ public class LevelSelectMenu : MonoBehaviour
         {
             Destroy(button.gameObject);
         }
+
+        AllButtons.Clear();
     }
 }

@@ -65,6 +65,8 @@ public class PuzzleManager : MonoBehaviour
 
     private void LevelComplete()
     {
+        SoundLibrary.Instance.PlaySound(SFX.LevelComplete, 0.5f);
+
         foreach (PuzzlePiece piece in AllPieces)
         {
             piece.Disappear();

@@ -10,6 +10,7 @@ public class PuzzlePiece : MonoBehaviour
     private bool m_Rotating = false;
     private SpriteRenderer m_Sprite;
     private bool m_Locked;
+    private AudioSource m_Audio;
 
     public int StartingRotation;
     public int TargetRotation;
@@ -20,12 +21,13 @@ public class PuzzlePiece : MonoBehaviour
     void Awake()
     {
         m_Sprite = GetComponent<SpriteRenderer>();
+        m_Audio = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
         transform.localScale = Vector3.zero;
-        LeanTween.scale(gameObject, Vector3.one, 0.25f).setDelay(UnityEngine.Random.Range(0.25f, 0.75f)).setEaseInOutQuad();
+        LeanTween.scale(gameObject, Vector3.one, 0.25f).setDelay(UnityEngine.Random.Range(0.25f, 0.75f)).setEaseInOutQuad().setOnStart(() => m_Audio.Play());
     }
 
     public void Disappear()
@@ -68,6 +70,8 @@ public class PuzzlePiece : MonoBehaviour
             if (OnPieceMoved != null)
                 OnPieceMoved.Invoke();
         });
+
+        SoundLibrary.Instance.PlaySound(SFX.ShapeRotate);
     }
 
     public int GetRandomRotation(bool isTarget)
