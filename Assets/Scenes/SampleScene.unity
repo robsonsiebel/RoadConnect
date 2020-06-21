@@ -2164,6 +2164,7 @@ MonoBehaviour:
   LevelSelectButtonPrefab: {fileID: 675128251909910184, guid: d9629b566a3cae046a5064518138b47a,
     type: 3}
   ButtonGrid: {fileID: 149310015}
+  AllButtons: []
 --- !u!224 &737476932
 RectTransform:
   m_ObjectHideFlags: 0

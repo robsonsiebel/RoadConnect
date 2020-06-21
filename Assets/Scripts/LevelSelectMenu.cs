@@ -7,22 +7,31 @@ using System;
 
 public class LevelSelectMenu : MonoBehaviour
 {
-
-    private int m_LevelCount = 0;
-
     public GameObject LevelSelectButtonPrefab;
     public Transform ButtonGrid;
+    public List<Button> AllButtons;
 
     public Action<int> OnLevelPressed;
 
-    public void AddLevel(int levelID)
+    public void AddLevel(int levelID, bool unlocked)
     {
         Button newLevel = GameObject.Instantiate(LevelSelectButtonPrefab, ButtonGrid).GetComponent<Button>();
         
-        m_LevelCount++;
-        newLevel.name = "Level " + m_LevelCount;
-        newLevel.GetComponentInChildren<TMP_Text>().text = m_LevelCount.ToString();
+        newLevel.name = "Level " + levelID + 1;
+        newLevel.GetComponentInChildren<TMP_Text>().text = (levelID + 1).ToString();
         newLevel.onClick.AddListener(() => OnLevelPressed(levelID));
-        
+        AllButtons.Add(newLevel);
+        if (!unlocked)
+        {
+            newLevel.interactable = false;
+        }    
+    }
+
+    public void ClearMenu()
+    {
+        foreach (Button button in AllButtons)
+        {
+            Destroy(button.gameObject);
+        }
     }
 }

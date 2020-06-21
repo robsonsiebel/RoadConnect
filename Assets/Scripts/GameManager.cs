@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private readonly string LEVEL_KEY = "Level";
 
     private int m_NumberOfLevels;
     private int m_CurrentLevel;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void HandleLevelComplete()
     {
         GameUI.LevelCompleteAnimation();
+        SaveProgress(m_CurrentLevel);
 
         if (!(m_CurrentLevel >= m_NumberOfLevels - 1))
         {
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
     {
         LevelSelect.gameObject.SetActive(true);
         PuzzleManager.ClearLevel();
+        PopulateLevelSelect();
     }
 
     private void LoadLevel(int levelID)
@@ -90,7 +93,7 @@ public class GameManager : MonoBehaviour
 
         foreach (LevelData levelData in LevelCreatorData.GameLevels)
         {
-            if (levelData.levelID == levelID)
+            if (levelData.LevelID == levelID)
             {
                 level = levelData;
             }
@@ -101,10 +104,38 @@ public class GameManager : MonoBehaviour
 
     void PopulateLevelSelect()
     {
+        LevelSelect.ClearMenu();
+
         foreach(LevelData level in LevelCreatorData.GameLevels)
         {
-            LevelSelect.AddLevel(level.levelID);
+            bool unlocked = CheckIfLevelIsUnlocked(level.LevelID);
+            LevelSelect.AddLevel(level.LevelID, unlocked);
         }
 
+    }
+
+    bool CheckIfLevelIsUnlocked(int levelID)
+    {
+        bool isUnlocked = false;
+        
+        // Fist level is always available
+        if (levelID == 0)
+        {
+            isUnlocked = true;
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt(LEVEL_KEY + (levelID - 1)) == 1)
+            {
+                isUnlocked = true;
+            }
+        }
+
+        return isUnlocked;
+    }
+
+    void SaveProgress(int levelID)
+    {
+        PlayerPrefs.SetInt(LEVEL_KEY + levelID, 1);
     }
 }

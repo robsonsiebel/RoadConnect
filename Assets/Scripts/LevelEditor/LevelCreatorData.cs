@@ -14,7 +14,7 @@ public class LevelCreatorData : ScriptableObject
 
     public void AddNewNevel(LevelData newLevel)
     {
-        newLevel.levelID = GameLevels.Count;
+        newLevel.LevelID = GameLevels.Count;
         GameLevels.Add(newLevel);
         EditorUtility.SetDirty(this);
         Debug.Log("level added");
@@ -23,5 +23,10 @@ public class LevelCreatorData : ScriptableObject
     public void ClearLevels()
     {
         GameLevels.Clear();
+    }
+
+    public void ClearProgress()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

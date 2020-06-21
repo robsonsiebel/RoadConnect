@@ -17,5 +17,12 @@ public class LevelCreatorDataEditor : Editor
         {
             myScript.ClearLevels();
         }
+
+        GUILayout.Space(20);
+
+        if (GUILayout.Button("Clear Progress", GUILayout.Width(150)))
+        {
+            myScript.ClearProgress();
+        }
     }
 }

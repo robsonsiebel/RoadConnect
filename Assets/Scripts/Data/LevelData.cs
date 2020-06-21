@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelData
 {
 
-    public int levelID;
-
+    public int LevelID;
+    public bool Cleared;
     public List<PieceData> AllPieces = new List<PieceData>();
 }

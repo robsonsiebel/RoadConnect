@@ -78,9 +78,9 @@ public class LevelEditor : MonoBehaviour
     {
         foreach(LevelData level in LevelCreatorData.GameLevels)
         {
-            if (level.levelID == levelSelectorDropdown.value)
+            if (level.LevelID == levelSelectorDropdown.value)
             {
-                print("level found!" + level.levelID);
+                print("level found!" + level.LevelID);
                 LoadLevel(level);
             }
         }
@@ -110,7 +110,7 @@ public class LevelEditor : MonoBehaviour
         List<string> options = new List<string>();
         foreach (LevelData levelData in LevelCreatorData.GameLevels)
         {
-            options.Add(levelData.levelID.ToString());
+            options.Add(levelData.LevelID.ToString());
         }
         LevelSelectorDropdown.ClearOptions();
         LevelSelectorDropdown.AddOptions(options);
