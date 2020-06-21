@@ -11,22 +11,31 @@ public class GameManager : MonoBehaviour
     private int m_CurrentLevel;
 
     public LevelCreatorData LevelCreatorData;
-    public LevelSelectMenu LevelSelect;
     public PuzzleManager PuzzleManager;
     public GameUI GameUI;
 
+    [Header("Screens")]
+    public LevelSelectMenu LevelSelect;
+    public TitleScreen TitleScreen;
 
     void Awake()
     {
         GameUI.BtnMenu.onClick.AddListener(OnMenuPressed);
+        GameUI.BtnPlay.onClick.AddListener(OnPlayPressed);
         PuzzleManager.OnLevelComplete += HandleLevelComplete;
+        TitleScreen.OnAnimationComplete += HandleTItleScreenAnimationComplete;
+    }
+
+    private void HandleTItleScreenAnimationComplete()
+    {
+        GameUI.ButtonPlayAppear();
     }
 
     void Start()
     {
         m_NumberOfLevels = LevelCreatorData.GameLevels.Count;
         PopulateLevelSelect();
-        LevelSelect.gameObject.SetActive(true);
+        
         SoundLibrary.Instance.PlayMusic();
 
     }
@@ -71,6 +80,8 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         LevelSelect.OnLevelPressed -= LoadLevel;
+        PuzzleManager.OnLevelComplete -= HandleLevelComplete;
+        TitleScreen.OnAnimationComplete -= HandleTItleScreenAnimationComplete;
     }
 
     private void OnMenuPressed()
@@ -80,6 +91,21 @@ public class GameManager : MonoBehaviour
         PopulateLevelSelect();
 
         SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
+    }
+
+    private void OnPlayPressed()
+    {
+        LeanTween.scale(GameUI.BtnPlay.gameObject, new Vector3(1.1f, 1.1f, 1), 0.5f).setEasePunch();
+
+        StartCoroutine(RemoveTitleScreen());
+        LevelSelect.gameObject.SetActive(true);
+        SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
+    }
+
+    IEnumerator RemoveTitleScreen()
+    {
+        yield return new WaitForSeconds(0.5f);
+        TitleScreen.gameObject.SetActive(false);
     }
 
     private void LoadLevel(int levelID)

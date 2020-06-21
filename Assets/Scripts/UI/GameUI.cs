@@ -10,12 +10,14 @@ public class GameUI : MonoBehaviour
 
     [Header("Buttons")]
     public Button BtnMenu;
+    public Button BtnPlay;
 
     [Header("Animations")]
     public Animator LevelHeader;
 
     private void Start()
     {
+        BtnPlay.gameObject.SetActive(false);
         BtnMenu.onClick.AddListener(() => TxtEndGame.gameObject.SetActive(false));
     }
 
@@ -38,5 +40,12 @@ public class GameUI : MonoBehaviour
     {
         TxtLevelName.text = "";
         TxtEndGame.gameObject.SetActive(true);
+    }
+
+    public void ButtonPlayAppear()
+    {
+        BtnPlay.gameObject.transform.localScale = Vector3.zero;
+        BtnPlay.gameObject.SetActive(true);        
+        LeanTween.scale(BtnPlay.gameObject, Vector3.one, 0.5f).setEaseInOutQuad();
     }
 }

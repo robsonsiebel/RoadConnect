@@ -26,6 +26,10 @@ Gif 05 - Level Select
 
 ![alt text](https://i.imgur.com/8zESPfx.gif) 
 
-Gif 06
+Gif 06 - Animations
 
 ![alt text](https://i.imgur.com/m1DdwxJ.gif) 
+
+Gif 07 - Title Screen
+
+![alt text](https://i.imgur.com/zB702yf.gif) 
