@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelEditorMenu : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("Level Editor/Launch")]
     static void OpenLevelEditor()
     {
@@ -26,5 +27,5 @@ public class LevelEditorMenu : MonoBehaviour
 
         Selection.activeObject = asset;
     }
-
+#endif
 }

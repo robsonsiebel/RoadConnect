@@ -13,15 +13,18 @@ public class LevelCreatorData : ScriptableObject
 
     public void AddNewNevel(LevelData newLevel)
     {
+#if UNITY_EDITOR
         newLevel.LevelID = GameLevels.Count;
         GameLevels.Add(newLevel);
         EditorUtility.SetDirty(this);
         Debug.Log("level added");
+#endif
     }
     
     public void ClearLevels()
     {
         GameLevels.Clear();
+        ClearProgress();
     }
 
     public void ClearProgress()
