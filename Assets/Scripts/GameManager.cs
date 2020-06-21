@@ -33,11 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        m_NumberOfLevels = LevelCreatorData.GameLevels.Count;
-        PopulateLevelSelect();
-        
         SoundLibrary.Instance.PlayMusic();
-
     }
 
     private void HandleLevelComplete()
@@ -96,9 +92,10 @@ public class GameManager : MonoBehaviour
     private void OnPlayPressed()
     {
         LeanTween.scale(GameUI.BtnPlay.gameObject, new Vector3(1.1f, 1.1f, 1), 0.5f).setEasePunch();
-
         StartCoroutine(RemoveTitleScreen());
         LevelSelect.gameObject.SetActive(true);
+        m_NumberOfLevels = LevelCreatorData.GameLevels.Count;
+        PopulateLevelSelect();
         SoundLibrary.Instance.PlaySound(SFX.DefaultClick);
     }
 

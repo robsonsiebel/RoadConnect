@@ -83,7 +83,6 @@ public class LevelEditor : MonoBehaviour
         {
             if (level.LevelID == levelSelectorDropdown.value)
             {
-                print("level found!" + level.LevelID);
                 LoadLevel(level);
             }
         }
@@ -98,8 +97,6 @@ public class LevelEditor : MonoBehaviour
             m_AllButtons[i].CurrentPieceId = level.AllPieces[i].PieceID;
             m_AllButtons[i].StartRotation = level.AllPieces[i].StartRotation;
             m_AllButtons[i].TargetRotation = level.AllPieces[i].TargetRotation;
-
-            print("piece ID " + level.AllPieces[i].PieceID);
 
             if (m_AllButtons[i].CurrentPieceId != -1)
             {
@@ -190,6 +187,7 @@ public class LevelEditor : MonoBehaviour
                 BtnSolution.interactable = true;
                 t_editor_mode.text = "Layout";
                 SetUnusedTilesVisible(true);
+                LevelSelectorDropdown.interactable = true;
                 break;
             case LevelEditorMode.Start:
                 BtnLayout.interactable = true;
@@ -197,6 +195,8 @@ public class LevelEditor : MonoBehaviour
                 BtnSolution.interactable = true;
                 t_editor_mode.text = "Starting Rotation";
                 SetUnusedTilesVisible(false);
+                SwitchToStartingRotation();
+                LevelSelectorDropdown.interactable = false;
                 break;
             case LevelEditorMode.Solution:
                 BtnLayout.interactable = true;
@@ -204,6 +204,8 @@ public class LevelEditor : MonoBehaviour
                 BtnStartRotation.interactable = true;
                 t_editor_mode.text = "Target Rotation";
                 SetUnusedTilesVisible(false);
+                SwitchToTargetRotation();
+                LevelSelectorDropdown.interactable = false;
                 break;
         }
     }
@@ -215,6 +217,28 @@ public class LevelEditor : MonoBehaviour
             if (piece.CurrentPieceId == -1)
             {
                 piece.SetVisible(visible);
+            }
+        }
+    }
+
+    void SwitchToTargetRotation()
+    {
+        foreach (GridButton piece in m_AllButtons)
+        {
+            if (piece.CurrentPieceId != -1)
+            {
+                piece.SwitchToTargetRotation();
+            }
+        }
+    }
+
+    void SwitchToStartingRotation()
+    {
+        foreach (GridButton piece in m_AllButtons)
+        {
+            if (piece.CurrentPieceId != -1)
+            {
+                piece.SwitchToStartRotation();
             }
         }
     }

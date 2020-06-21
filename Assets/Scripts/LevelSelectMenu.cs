@@ -29,6 +29,7 @@ public class LevelSelectMenu : MonoBehaviour
         if (!unlocked)
         {
             newLevel.interactable = false;
+            newLevel.image.color = Color.gray;
         }    
     }
 

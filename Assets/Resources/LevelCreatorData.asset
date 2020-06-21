@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSprites:
   - {fileID: 21300000, guid: 3c3b728fab8252c4e82f2279165325d6, type: 3}
+  - {fileID: 21300000, guid: 4b8ad2eddcb4afa48aab5547f5a65632, type: 3}
+  - {fileID: 21300000, guid: 62f40124b56123d478387f5a299fd7a1, type: 3}
+  - {fileID: 21300000, guid: d24500caab90c1440bf0d1e6c7d50193, type: 3}
+  - {fileID: 21300000, guid: 39ce5bf0671eb19438bb49e5a7025217, type: 3}
   - {fileID: 21300000, guid: a2ff0a00ccac1fb4eb76435848302286, type: 3}
   - {fileID: 21300000, guid: c09222170cf22904d8629352ece18d17, type: 3}
   GameLevels:
   - LevelID: 0
-    Cleared: 0
     AllPieces:
     - PieceID: -1
       StartRotation: 0
@@ -39,7 +42,7 @@ MonoBehaviour:
       StartRotation: 270
       TargetRotation: 0
     - PieceID: 0
-      StartRotation: 90
+      StartRotation: 0
       TargetRotation: 270
     - PieceID: -1
       StartRotation: 0
@@ -48,7 +51,7 @@ MonoBehaviour:
       StartRotation: 0
       TargetRotation: 0
     - PieceID: 0
-      StartRotation: 270
+      StartRotation: 180
       TargetRotation: 90
     - PieceID: 0
       StartRotation: 90
@@ -69,7 +72,56 @@ MonoBehaviour:
       StartRotation: 0
       TargetRotation: 0
   - LevelID: 1
-    Cleared: 0
+    AllPieces:
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 0
+      StartRotation: 270
+      TargetRotation: 0
+    - PieceID: 2
+      StartRotation: 270
+      TargetRotation: 180
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 0
+      StartRotation: 180
+      TargetRotation: 90
+    - PieceID: 4
+      StartRotation: 90
+      TargetRotation: 270
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 2
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 4
+      StartRotation: 270
+      TargetRotation: 180
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+  - LevelID: 2
     AllPieces:
     - PieceID: -1
       StartRotation: 0
@@ -99,9 +151,9 @@ MonoBehaviour:
       StartRotation: 0
       TargetRotation: 0
     - PieceID: 0
-      StartRotation: 0
+      StartRotation: 180
       TargetRotation: 90
-    - PieceID: 1
+    - PieceID: 5
       StartRotation: 270
       TargetRotation: 0
     - PieceID: -1
@@ -113,9 +165,59 @@ MonoBehaviour:
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
-    - PieceID: 1
+    - PieceID: 5
       StartRotation: 270
       TargetRotation: 0
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
+  - LevelID: 3
+    AllPieces:
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 2
+      StartRotation: 0
+      TargetRotation: 270
+    - PieceID: 2
+      StartRotation: 180
+      TargetRotation: 270
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 4
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 3
+      StartRotation: 270
+      TargetRotation: 180
+    - PieceID: 3
+      StartRotation: 270
+      TargetRotation: 0
+    - PieceID: 4
+      StartRotation: 270
+      TargetRotation: 270
+    - PieceID: 1
+      StartRotation: 270
+      TargetRotation: 0
+    - PieceID: 6
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 6
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: 1
+      StartRotation: 270
+      TargetRotation: 0
+    - PieceID: 4
+      StartRotation: 180
+      TargetRotation: 90
+    - PieceID: 4
+      StartRotation: 90
+      TargetRotation: 180
+    - PieceID: 4
+      StartRotation: 180
+      TargetRotation: 90
+    - PieceID: 4
+      StartRotation: 90
+      TargetRotation: 180

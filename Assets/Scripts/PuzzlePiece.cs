@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzlePiece : MonoBehaviour
@@ -11,6 +9,8 @@ public class PuzzlePiece : MonoBehaviour
     private SpriteRenderer m_Sprite;
     private bool m_Locked;
     private AudioSource m_Audio;
+    private bool m_IsMirrored;
+    private bool m_IsBonus;
 
     public int StartingRotation;
     public int TargetRotation;
@@ -40,12 +40,53 @@ public class PuzzlePiece : MonoBehaviour
     {
         m_Sprite.sprite = sprite;
         StartingRotation = startRotation;
-        transform.localEulerAngles = new Vector3(0,0,StartingRotation);
+        transform.localEulerAngles = new Vector3(0, 0, StartingRotation);
         TargetRotation = targetRotation;
+
+        if (sprite.name.Contains("MR180"))
+        {
+            m_IsMirrored = true;
+        }
+        else
+        if (sprite.name.Contains("BN360"))
+        {
+            m_IsBonus = true;
+        }
     }
 
     public bool IsOnTargetPosition()
     {
+
+        if (m_IsBonus)
+        {
+            return true;
+        }
+
+        if (m_IsMirrored)
+        {
+            if (!Mathf.Approximately(transform.localEulerAngles.z, TargetRotation))
+            {
+                int newTarget = 0;
+                switch (TargetRotation)
+                {
+                    case 0:
+                        newTarget = 180;
+                        break;
+                    case 90:
+                        newTarget = 270;
+                        break;
+                    case 180:
+                        newTarget = 0;
+                        break;
+                    case 270:
+                        newTarget = 90;
+                        break;
+                }
+
+                return Mathf.Approximately(transform.localEulerAngles.z, newTarget);
+            }
+        }
+
         return Mathf.Approximately(transform.localEulerAngles.z,TargetRotation);
     }
 
@@ -72,37 +113,5 @@ public class PuzzlePiece : MonoBehaviour
         });
 
         SoundLibrary.Instance.PlaySound(SFX.ShapeRotate);
-    }
-
-    public int GetRandomRotation(bool isTarget)
-    {
-        int r = UnityEngine.Random.Range(0, 3);
-        int rotation = 0;
-
-        switch (r)
-        {
-            case 0:
-                rotation = 0;
-            break;
-            case 1:
-                rotation = 90;
-            break;
-            case 2:
-                rotation = 180;
-            break;
-            case 3:
-                rotation = 270;
-            break;
-        }
-
-        if (isTarget)
-        {
-            if (rotation == StartingRotation)
-            {
-                rotation += 90;
-            }
-        }
-
-        return rotation;
     }
 }

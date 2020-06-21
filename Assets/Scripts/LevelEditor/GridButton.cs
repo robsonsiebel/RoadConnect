@@ -74,6 +74,16 @@ public class GridButton : MonoBehaviour
         TargetRotation = (int)m_Button.transform.localEulerAngles.z;
     }
 
+    public void SwitchToTargetRotation()
+    {
+        m_Button.transform.localEulerAngles = new Vector3(0,0,TargetRotation);
+    }
+
+    public void SwitchToStartRotation()
+    {
+        m_Button.transform.localEulerAngles = new Vector3(0, 0, StartRotation);
+    }
+
     void Rotate()
     {
         m_Button.transform.localEulerAngles = new Vector3(0, 0, m_Button.transform.localEulerAngles.z - 90);
