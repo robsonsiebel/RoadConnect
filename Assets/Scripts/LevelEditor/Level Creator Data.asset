@@ -17,57 +17,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a2ff0a00ccac1fb4eb76435848302286, type: 3}
   - {fileID: 21300000, guid: c09222170cf22904d8629352ece18d17, type: 3}
   GameLevels:
-  - levelID: Level0
-    AllPieces:
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 270
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level1
+  - levelID: 0
     AllPieces:
     - PieceID: -1
       StartRotation: 0
@@ -75,79 +25,17 @@ MonoBehaviour:
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
     - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
       StartRotation: 270
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level2
-    AllPieces:
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 270
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
       TargetRotation: 0
     - PieceID: 0
       StartRotation: 0
@@ -158,50 +46,12 @@ MonoBehaviour:
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level3
-    AllPieces:
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
     - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 270
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 270
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
+      StartRotation: 180
+      TargetRotation: 90
     - PieceID: 0
       StartRotation: 90
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 270
+      TargetRotation: 180
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
@@ -217,7 +67,7 @@ MonoBehaviour:
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
-  - levelID: Level4
+  - levelID: 1
     AllPieces:
     - PieceID: -1
       StartRotation: 0
@@ -238,193 +88,20 @@ MonoBehaviour:
       StartRotation: 0
       TargetRotation: 0
     - PieceID: 0
-      StartRotation: 0
+      StartRotation: 180
       TargetRotation: 270
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
+    - PieceID: -1
+      StartRotation: 0
+      TargetRotation: 0
     - PieceID: 0
+      StartRotation: 180
+      TargetRotation: 90
+    - PieceID: 1
       StartRotation: 270
       TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 270
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 270
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level5
-    AllPieces:
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 90
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 270
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 90
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 270
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 180
-      TargetRotation: 270
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level6
-    AllPieces:
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 270
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 270
-    - PieceID: 2
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 2
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 270
-  - levelID: Level7
-    AllPieces:
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 0
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-  - levelID: Level8
-    AllPieces:
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
     - PieceID: -1
       StartRotation: 0
       TargetRotation: 0
@@ -435,34 +112,7 @@ MonoBehaviour:
       StartRotation: 0
       TargetRotation: 0
     - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: 1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
-      TargetRotation: 0
-    - PieceID: -1
-      StartRotation: 0
+      StartRotation: 270
       TargetRotation: 0
     - PieceID: -1
       StartRotation: 0

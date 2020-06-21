@@ -33,7 +33,22 @@ public class GameManager : MonoBehaviour
     {
         GameUI.LevelCompleteAnimation();
 
-        StartCoroutine(LevelTransition());
+        if (!(m_CurrentLevel >= m_NumberOfLevels - 1))
+        {
+            StartCoroutine(LevelTransition());
+        }
+        else
+        {
+            StartCoroutine(EndGameAnimation());
+        }
+        
+    }
+
+    IEnumerator EndGameAnimation()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        GameUI.AllLevelsCompleteAnimation();
     }
 
     IEnumerator LevelTransition()

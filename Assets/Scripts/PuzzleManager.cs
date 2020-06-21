@@ -73,9 +73,7 @@ public class PuzzleManager : MonoBehaviour
         if (OnLevelComplete != null)
         {
             OnLevelComplete.Invoke();
-        }
-            
-        print("Level Complete!");
+        }            
     }
 
     private void OnDisable()
