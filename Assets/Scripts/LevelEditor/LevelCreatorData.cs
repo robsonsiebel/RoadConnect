@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
 [CreateAssetMenu(fileName = "Level Creator Data")]
 public class LevelCreatorData : ScriptableObject
 {

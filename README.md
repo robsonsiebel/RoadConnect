@@ -33,3 +33,7 @@ Gif 06 - Animations
 Gif 07 - Title Screen
 
 ![alt text](https://i.imgur.com/zB702yf.gif) 
+
+Gif 08 - Editor Window
+
+![alt text](https://i.imgur.com/Wr9uJbT.gif) 

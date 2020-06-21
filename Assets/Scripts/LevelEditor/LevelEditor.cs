@@ -25,14 +25,15 @@ public class LevelEditor : MonoBehaviour
 
     public TMP_Text t_editor_mode;
 
+    public TMP_Dropdown LevelSelectorDropdown;
+
+    [Header("Buttons")]
     public Button BtnLayout;
     public Button BtnStartRotation;
     public Button BtnSolution;
-
     public Button BtnSave;
     public Button BtnClear;
-
-    public TMP_Dropdown LevelSelectorDropdown;
+    public Button BtnClose;
 
 
     private void Start()
@@ -64,6 +65,8 @@ public class LevelEditor : MonoBehaviour
         {
             OnValueSelected(LevelSelectorDropdown);
         });
+
+        BtnClose.onClick.AddListener(() => Destroy(gameObject));
     }
 
     private void ClearLevel()
